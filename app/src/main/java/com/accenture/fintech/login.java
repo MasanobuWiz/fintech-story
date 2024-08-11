@@ -22,7 +22,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.appcheck.FirebaseAppCheck;
-import com.accenture.fintech.CustomProvider;
 
 public class login extends AppCompatActivity {
 

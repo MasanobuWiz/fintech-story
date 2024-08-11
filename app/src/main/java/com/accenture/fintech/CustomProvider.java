@@ -14,8 +14,8 @@ public class CustomProvider implements AppCheckProvider, AppCheckProviderFactory
     private final long expiration;
 
     public CustomProvider() {
-        // トークンを設定し、有効期限を1年後に設定
-        this.token = "C711DB84-C68B-4A48-B013-216A406FAA50";
+        // 環境変数からトークンを取得
+        this.token = System.getenv("APP_CHECK_DEBUG_TOKEN_FROM_CI");
         this.expiration = System.currentTimeMillis() + 365L * 24 * 60 * 60 * 1000; // 1年間のミリ秒
     }
 
