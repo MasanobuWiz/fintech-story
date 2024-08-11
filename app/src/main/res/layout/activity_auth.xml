@@ -1,0 +1,27 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <!-- 背景画像を設定 -->
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/background_image_description"
+        android:scaleType="fitXY"
+        android:src="@drawable/login" />
+
+    <!-- クリック可能なボタンを追加 -->
+    <Button
+        android:id="@+id/google_login_button"
+        android:layout_width="600dp"
+        android:layout_height="90dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="187dp"
+        android:background="@drawable/google_login_button"
+        android:text="GOOGLE LOGIN"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
+</RelativeLayout>

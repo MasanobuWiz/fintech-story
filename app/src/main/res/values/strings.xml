@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name" translatable="false">fintech_story</string>
+    <string name="home">home</string>
+    <string name="book">book</string>
+    <string name="stock">stock</string>
+    <string name="coin">coin</string>
+    <string name="search">search</string>
+    <string name="account">account</string>
+    <string name="google_login_button">Google Login</string>
+    <string name="background_image_description">backgroud login</string>
+</resources>

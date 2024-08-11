@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1099386894399",
+    "firebase_url": "https://fintech-bd8e7-default-rtdb.firebaseio.com",
+    "project_id": "fintech-bd8e7",
+    "storage_bucket": "fintech-bd8e7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1099386894399:android:339fd24fe48b419e3be08a",
+        "android_client_info": {
+          "package_name": "com.accenture.fintech"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1099386894399-kgajvhir5t7oj8m5dqqh15thlufgkdu6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvbbhpUEZNo7WLNSpGc7JYzFW6JAvkmog"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1099386894399-kgajvhir5t7oj8m5dqqh15thlufgkdu6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

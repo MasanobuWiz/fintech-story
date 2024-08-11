@@ -1,0 +1,17 @@
+{
+    "name": "Android Development Container",
+    "image": "android-development:latest",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.shell.linux": "/bin/bash"
+            },
+            "extensions": [
+                "ms-azuretools.vscode-docker",
+                "ms-vscode-remote.remote-containers"
+            ]
+        }
+    },
+    "forwardPorts": [],
+    "postCreateCommand": "echo 'Container has been created'"
+}

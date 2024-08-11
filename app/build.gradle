@@ -1,0 +1,86 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics' // Firebase Crashlytics Plugin
+}
+
+android {
+    compileSdkVersion 34 // 最新バージョンに更新
+    defaultConfig {
+        applicationId "com.accenture.fintech"
+        minSdkVersion 23
+        targetSdkVersion 34 // 最新バージョンに更新
+        versionCode 1
+        versionName "1.0"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("C:\\Users\\user\\.android\\fintech.keystore")
+            storePassword "Enjoy1986!" // キーストアのパスワード
+            keyAlias "fintech_key"
+            keyPassword "Enjoy1986!" // キーのパスワード
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    namespace 'com.accenture.fintech'
+}
+
+dependencies {
+    // Firebase BoM (Bill of Materials) for dependency management
+    implementation platform('com.google.firebase:firebase-bom:33.1.2') // 最新バージョンに更新
+
+    // Firebase SDKs
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-firestore'
+    implementation 'com.google.firebase:firebase-storage'
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-inappmessaging-display'
+    implementation 'com.google.firebase:firebase-auth-interop'
+    implementation 'com.google.firebase:firebase-functions'
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-database'
+
+    implementation 'com.google.android.gms:play-services-auth:20.4.0'
+
+    // AndroidX
+    implementation 'androidx.appcompat:appcompat:1.7.0' // 最新バージョンに更新
+    implementation 'androidx.core:core-ktx:1.13.1' // 最新バージョンに更新
+    implementation 'androidx.core:core-splashscreen:1.0.1' // 最新バージョンに更新
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4' // 最新バージョンに更新
+    implementation 'androidx.recyclerview:recyclerview:1.3.2' // 最新バージョンに更新
+    implementation 'androidx.viewpager2:viewpager2:1.1.0' // 最新バージョンに更新
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    // その他ライブラリ
+    implementation 'org.apache.commons:commons-text:1.9'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    implementation 'com.google.firebase:firebase-appcheck-debug:18.0.0'
+    implementation 'com.google.firebase:firebase-appcheck-playintegrity:18.0.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    implementation 'com.google.code.gson:gson:2.10.1' // 最新バージョンに更新
+    implementation 'com.squareup.okhttp3:okhttp:4.9.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.2'
+
+    // プロジェクト内の他のモジュール
+    implementation project(':list')
+    implementation project(':utilities')
+}
