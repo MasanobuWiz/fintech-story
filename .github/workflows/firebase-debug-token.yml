@@ -3,10 +3,10 @@ name: Firebase Debug Token CI
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
   workflow_dispatch:  # 手動でワークフローを実行するためのトリガーを追加
 
 jobs:
