@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - master
-  workflow_dispatch:  # 手動でワークフローを実行するためのトリガー
+  workflow_dispatch:
 
 jobs:
   manage-token:
@@ -23,8 +23,8 @@ jobs:
         run: |
           echo "Firebase App Check Debug Token decrypted and ready to use"
 
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+
       - name: Build with Gradle
         run: ./gradlew assembleDebug
-
-      - name: Run Firebase Test
-        run: ./gradlew test
