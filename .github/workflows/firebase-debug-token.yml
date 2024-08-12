@@ -23,11 +23,9 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Decrypt Firebase App Check Debug Token
-        env:
-          APP_CHECK_DEBUG_TOKEN_FROM_CI: ${{ secrets.FIREBASE_APP_CHECK_DEBUG_TOKEN }}
+      - name: Decode and save Android Keystore
         run: |
-          echo "Firebase App Check Debug Token decrypted and ready to use"
+          echo ${{ secrets.ANDROID_KEYSTORE }} | base64 --decode > $HOME/fintech.keystore
 
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
