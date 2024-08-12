@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:  # 手動でワークフローを実行するためのトリガーを追加
 
 jobs:
   manage-token:
@@ -21,4 +22,4 @@ jobs:
           APP_CHECK_DEBUG_TOKEN_FROM_CI: ${{ secrets.FIREBASE_APP_CHECK_DEBUG_TOKEN }}
         run: |
           echo "Firebase App Check Debug Token decrypted and ready to use"
-          # Add any additional steps if necessary
+          # 必要に応じて追加のステップをここに記述
