@@ -16,10 +16,11 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("C:\\Users\\user\\.android\\fintech.keystore")
-            storePassword "Enjoy1986!" // キーストアのパスワード
-            keyAlias "fintech_key"
-            keyPassword "Enjoy1986!" // キーのパスワード
+            // キーストアのパスを環境変数から取得
+            storeFile file(System.getenv("HOME") + "/fintech.keystore")
+            storePassword System.getenv("KEYSTORE_PASSWORD") // GitHub Secretsから読み込む
+            keyAlias System.getenv("KEY_ALIAS") // GitHub Secretsから読み込む
+            keyPassword System.getenv("KEY_PASSWORD") // GitHub Secretsから読み込む
         }
     }
 
@@ -27,6 +28,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
