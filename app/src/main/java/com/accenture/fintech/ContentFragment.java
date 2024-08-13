@@ -19,8 +19,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.accenture.fintech.R;
 import com.bumptech.glide.Glide;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +31,6 @@ import java.util.List;
 public class ContentFragment extends Fragment {
 
     private static final String TAG = "ContentFragment";
-    private static final String STORAGE_PATH = "gs://fintech-bd8e7.appspot.com/images/";
     private RecyclerView recyclerView;
     private ArrayList<Comic> comicsList;
     private ComicAdapter comicAdapter;
@@ -68,35 +70,37 @@ public class ContentFragment extends Fragment {
     }
 
     private void loadData() {
-        Log.d(TAG, "loadData: Loading data from Firebase Storage");
+        Log.d(TAG, "loadData: Loading data from Firebase Realtime Database");
         swipeRefreshLayout.setRefreshing(true); // インジケータを表示
 
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReferenceFromUrl(STORAGE_PATH);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference comicsRef = database.getReference("comics");
 
-        storageRef.listAll().addOnSuccessListener(listResult -> {
-            comicsList.clear();
-            Log.d(TAG, "listAll: Successfully listed all items.");
-            for (StorageReference fileRef : listResult.getItems()) {
-                fileRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                    String url = uri.toString();
-                    String fileName = fileRef.getName(); // ファイル名を取得
-                    String title = fileName.substring(0, fileName.lastIndexOf('.')); // 拡張子を除去したタイトル
-                    // Comicデータクラスに画像URLとタイトルをセットする
-                    Comic comic = new Comic(title, url);
-                    comicsList.add(comic);
-                    comicAdapter.notifyDataSetChanged();
-                    viewPagerAdapter.notifyDataSetChanged();
-                    Log.d(TAG, "loadData: Successfully loaded image - Title: " + title + ", URL: " + url);
-                    swipeRefreshLayout.setRefreshing(false);
-                }).addOnFailureListener(e -> {
-                    Log.e(TAG, "Error getting download URL for " + fileRef.getName(), e);
-                    swipeRefreshLayout.setRefreshing(false);
-                });
+        comicsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                comicsList.clear();
+                for (DataSnapshot comicSnapshot : dataSnapshot.getChildren()) {
+                    String title = comicSnapshot.child("title").getValue(String.class);
+                    String url = comicSnapshot.child("url").getValue(String.class);
+
+                    if (title != null && url != null) {
+                        Comic comic = new Comic(title, url);
+                        comicsList.add(comic);
+                    } else {
+                        Log.e(TAG, "Error: Title or URL is null.");
+                    }
+                }
+                comicAdapter.notifyDataSetChanged();
+                viewPagerAdapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
             }
-        }).addOnFailureListener(e -> {
-            Log.e(TAG, "Error listing files", e);
-            swipeRefreshLayout.setRefreshing(false);
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e(TAG, "Error loading data from Realtime Database", databaseError.toException());
+                swipeRefreshLayout.setRefreshing(false);
+            }
         });
     }
 
